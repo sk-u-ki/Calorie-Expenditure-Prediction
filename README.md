@@ -31,7 +31,6 @@ uv sync
 ![Korelacje](visual/correlation_matrix.png)
 ![Scatter](visual/scatter_plot.png)
 
-## Uwagi techniczne
+
 - Konfiguracje treningu sa w `src/config`.
-- W `src.predict` jest literowka (`model.pr`) i wywolanie nieistniejacej funkcji `test`; przed uzyciem popraw to albo uruchom `uv run python -m src.test`, by sprawdzic zapisany model.
 - Wykresy zapisywane sa do `visual/`.
