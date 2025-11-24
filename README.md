@@ -51,11 +51,13 @@ uv sync
 ![Gradients 3](visual/a31ba1c1-9356-4931-a8f8-9624cac1bb6a.jpg)
 
 ## Zadanie teoretyczne
-- Oblicz pochodne parametrow (w i b) sieci: wejscie 2 cechy [x1, x2], warstwa ukryta 2 neurony + ReLU, wyjscie 1 neuron (bez aktywacji), strata MSE, jedna obserwacja [2,3], y=5. Sprawdz przypadek inicjalizacji wszystkich wag/biasow = 1.0; przy inicjalizacji = 0.0 siec stoi (symetria, zerowe gradienty).
-- Pytania:  
-  • Dla jakich zadan warto stosowac sieci i dlaczego nie da sie napisac recznie programu z if-ami dla wszystkich kombinacji.  
-  • Po co funkcje aktywacji i co sie stanie, gdy w wielowarstwowej sieci je usunac (redukcja do pojedynczej transformacji liniowej).  
-  • Rola dropout: metoda regularyzacji, losowe wylaczanie neuronow w treningu, mniejsze przeuczenie.
+Dropout to metoda regularyzacji, która zmniejsza nadmierne uczenie się. Losowo wyłącza część neuronów podczas uczenia się, zmuszając sieć do niepolegania na poszczególnych połączeniach i tworzenia bardziej stabilnych reprezentacji. Na etapie wnioskowania wszystkie neurony działają, a wagi są korygowane poprzez skalowanie.
+
+Funkcje aktywacji są używane do wprowadzenia nieliniowości do sieci neuronowej, aby mogła ona modelować złożone zależności w danych. Bez nich sieć sprowadzałaby się do jednego przekształcenia liniowego i nie byłaby w stanie rozwiązać większości rzeczywistych zadań. Jeśli w sieci z kilkoma ukrytymi warstwami usunąć funkcje aktywacji, wszystkie jej warstwy zamienią się w jedno duże przekształcenie liniowe. Taka sieć stanie się równoważna jednej warstwie liniowej i straci zdolność modelowania zależności nieliniowych.
+
+Sieci neuronowe są wykorzystywane tam, gdzie zależności są złożone, nieliniowe i trudne do jednoznacznego opisania: w prognozowaniu, klasyfikacji, analizie obrazów, mowy i innych zadaniach z dużą liczbą cech. Nie można zbudować dokładnego predyktora w postaci zestawu if-ów, ponieważ liczba możliwych kombinacji cech wejściowych rośnie wykładniczo i nie da się ręcznie zapisać reguły dla każdej sytuacji. Ponadto rzeczywiste zależności są zazwyczaj ciągłe, z szumem i wariacjami, a zestaw sztywnych warunków nie będzie w stanie uogólniać; gdy pojawi się nowa wartość, nieco różniąca się od znanych, program oparty na if nie będzie wiedział, co zrobić.
+
+Oblicz pochodne parametrów (w i b) dla sieci: wejście 2 cechy [x1, x2], warstwa ukryta 2 neurony + ReLU, wyjście 1 neuron (bez aktywacji), strata MSE, jedna obserwacja [2,3], y=5. Rozważ inicjalizację wag/biasów = 1.0; przy inicjalizacji = 0.0 sieć stoi (symetria, zerowe gradienty).
 
 ### Wynik przy w=1.0, b=1.0 (dla powyzszej architektury)
 - Dane: `x = [2, 3]`, cel `y = 5`, ReLU w warstwie ukrytej, MSE.
