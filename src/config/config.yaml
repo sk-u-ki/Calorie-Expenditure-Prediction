@@ -8,4 +8,4 @@ data:
   train: "data/train.csv"
   test: "data/test.csv"
   validation: "data/validation.csv"
-  best_model: "outputs/2025-11-14/12-37-11/best_model.pth"
+  best_model: "outputs/2025-11-24/12-37-11/best_model.pth"

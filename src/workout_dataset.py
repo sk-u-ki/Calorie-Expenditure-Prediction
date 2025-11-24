@@ -15,6 +15,17 @@ def load_data(csv_file: str) -> tuple[torch.Tensor, torch.Tensor]:
     
     return x, y
 
+def load_data_test(csv_file: str) -> torch.Tensor:
+    data: pd.DataFrame = pd.read_csv(csv_file)
+    data['Sex'] = data['Sex'].map({'male': 1, 'female': 0}).astype(float)               
+
+    features: pd.DataFrame = data.drop(columns=['id'])
+    id: pd.DataFrame = data['id']
+
+    x: torch.Tensor = torch.tensor(features.values, dtype=torch.float32)
+
+    return x, id
+
 
 class WorkoutDataset(Dataset):
 
@@ -33,3 +44,20 @@ class WorkoutDataset(Dataset):
 
     def __getitem__(self, idx) -> tuple[torch.Tensor, torch.Tensor]:
         return self.x[idx], self.y[idx]
+class TestDataset(Dataset):
+
+    def __init__(self, csv_file: str, normalize: bool = True) -> None:
+        x, id = load_data_test(csv_file=csv_file)
+        self.x: torch.Tensor = x
+        self.id: pd.DataFrame = id
+
+        if normalize:
+            x_min, _ = x.min(dim=0, keepdim=True)
+            x_max, _ = x.max(dim=0, keepdim=True)
+            self.x = (x - x_min) / (x_max - x_min + 1e-8)  # avoid division by zero
+        
+    def __len__(self) -> int:
+        return len(self.x)
+
+    def __getitem__(self, idx) -> torch.Tensor:
+        return self.x[idx]
