@@ -31,6 +31,18 @@ uv sync
 ![Korelacje](visual/correlation_matrix.png)
 ![Scatter](visual/scatter_plot.png)
 
+## Zadanie teoretyczne (skrot)
+1) Dropout: regularyzacja, losowo wylacza czesc neuronow w trakcie treningu, zmniejszajac przeuczenie. W inferencji wszystkie neurony dzialaja, wagi sa skalowane.
+2) Funkcje aktywacji: dodaja nieliniowosc; bez nich wielowarstwowa siec redukuje sie do jednej transformacji liniowej i nie modeluje zlozonych zaleznosci.
+3) Kiedy sieci: gdy relacje sa nieliniowe i trudne do opisania regulkami (prognozy, klasyfikacja, obraz, mowa). Zestaw if-ow nie uogolni przy ciaglych, szumnych danych.
 
+### Przyklad obliczony recznie (architektura z zadania)
+- Dane: `x = [2, 3]`, cel `y = 5`, wszystkie wagi/biasy = 1, ReLU w warstwie ukrytej, MSE.
+- Forward: `z = W1*x + b1 = [6, 6]`, `h = ReLU(z) = [6, 6]`, `y_hat = W2^T h + b2 = 13`, blad `delta = 8`, strata `L = 32`.
+- Gradienty: `dL/dW2 = [48, 48]^T`, `dL/db2 = 8`, `dL/dW1 = [[16, 24], [16, 24]]`, `dL/db1 = [8, 8]^T`, `dL/dz = [8, 8]`.
+- Obrazy z wyprowadzeniem mozna dodac do repo (np. `visual/theory_gradients.png`) jesli trzeba pokazac zapis z notatek.
+
+## Uwagi techniczne
 - Konfiguracje treningu sa w `src/config`.
+- W `src.predict` jest literowka (`model.pr`) i wywolanie nieistniejacej funkcji `test`; przed uzyciem popraw to albo uruchom `uv run python -m src.test`.
 - Wykresy zapisywane sa do `visual/`.
