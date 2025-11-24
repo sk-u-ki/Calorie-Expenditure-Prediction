@@ -11,3 +11,8 @@ wheels/
 
 # Hydra outputs
 outputs/*
+
+# Dane
+train.csv
+test.csv
+

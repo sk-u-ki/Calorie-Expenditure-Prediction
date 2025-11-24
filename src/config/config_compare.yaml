@@ -1,0 +1,10 @@
+training:
+  learning_rate: [1e-3, 5e-4, 1e-4]
+  epochs: [30, 50, 70]
+  batch_size: 64
+  momentum: [0.3, 0.5, 0.9]
+
+data:
+  train: "data/train.csv"
+  test: "data/test.csv"
+  validation: "data/validation.csv"
